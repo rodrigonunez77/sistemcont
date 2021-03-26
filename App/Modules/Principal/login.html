@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" type="image/x-icon" href="../../Images/escudobolivia.png">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SISTEMA WEB CONTABLE</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../Core/Design/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../../Core/Design/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../Core/Design/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../../Core/Design/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- jQuery -->
+    <script src="../../Core/Design/vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../Core/Design/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../../Core/Design/vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../../Core/Design/dist/js/sb-admin-2.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row" >
+            <div class="col-md-5" align="center">
+            </div>
+            <div class="col-md-2" align="center">
+               <img class="img-responsive" src="../../Images/sistemCont.jpg"   >
+            </div>
+            <div class="col-md-5" align="center">
+            </div>
+        </div>
+
+        <div class="row"> 
+            <div class="col-md-4 col-md-offset-4" align="center">
+                <span style="font-size: 18px"><br><strong>SISTEMA WEB CONTABLE</strong></span>
+            </div>
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Ingreso</h3>
+                    </div>
+                   
+                    <div class="panel-body">
+                        <form role="form">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Usuario" name="USUARIO" id="USUARIO" type="email" autofocus
+                                     onkeypress="TeclaEnter(event,1)">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Password" name="PASSWORD" id="PASSWORD" type="password" value="" onKeyPress="TeclaEnter(event,2)">
+                                    <span id="avail"></span>
+                                </div>
+                                <!-- Change this to a button or input when using this as a form -->
+                                <a  class="btn btn-primary" onClick="validaUsuario()" >&nbsp;Ingresar&nbsp;</a>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script type="text/javascript">
+
+    function TeclaEnter(e,nroCaja){
+        tecla = (document.all) ? e.keyCode : e.which;
+        if(tecla==13){
+            switch(nroCaja){
+                case 1: document.getElementById("PASSWORD").focus();
+                        break;
+                case 2: validaUsuario(); 
+                        break;  
+            }                               
+        }   
+    }
+
+    function validaUsuario(){
+        $.post("../../Core/Components/searchLogin.php",{VALIDAR:"VALIDAR",LOGIN:$('#USUARIO').val(),PASS:$('#PASSWORD').val()},function(data){  
+            //alert(data);//se verifica el error que salta cuando no ingresa con ningun usuario
+            var dataLogin=data.split('@');
+            if(dataLogin[0]=="TRUE"){
+               window.location.href = "../Central/index.php"+dataLogin[1];
+            }
+            else{
+                $("#error").remove();
+                $("#avail").focus().after("<span id='error' class='errorMensaje font10h' style='color: red' >error! usuario incorrecto </span>");
+                $("#PASSWORD").val("");
+            }
+            //location.reload();
+        });
+      
+        //window.location.href = "../Central/index.php"
+    }
+
+
+  
+
+</script>

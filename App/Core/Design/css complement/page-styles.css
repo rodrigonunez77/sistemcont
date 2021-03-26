@@ -1,0 +1,66 @@
+
+/******************* CARGADOR RODRIGO NUÑEZ PALMA LOADER,JS *************************/
+
+#WindowLoad
+{
+	position:fixed;
+	top:0px;
+	left:0px;
+	z-index:3200;
+	filter:alpha(opacity=65);
+   -moz-opacity:65;
+	opacity:0.65;
+	background:#999;
+}	
+    /***************************mensajes de error *************************/
+	.errorMensaje{
+		background-color: #FFF;
+		border-radius: 4px 4px 4px 4px;
+		color: #BC1010;
+		border:1px solid #BC1010;
+		margin-left:10px;
+		padding: 5px 20px;
+		position: relative;
+		font:10px webfont;
+	}	
+	
+	.errorMensaje:before{
+		border-color: transparent #BC1010 transparent transparent;
+		border-style: solid;
+		border-width: 6px 8px;
+		content: "";
+		display: block;
+		height: 0;
+		left: -16px;
+		position:absolute;
+		top: 8px;
+		width: 0;
+	}
+	/********************** stylo que parpadea*****************************/
+	.hacer_click{
+		cursor:pointer;
+		-webkit-animation:click 2s infinite;
+	}
+	.egresos_pendientes{
+		cursor:pointer;
+		-webkit-animation:pendientes 2s infinite;
+	}
+	/*********************tamaño de letra*******************************/
+	.font12h{
+		font:12px handel;
+	}
+	/*************************letras mayusculas ***************************/
+	input.mayusculas{
+		text-transform:uppercase;
+	}
+	/********************************************************************/
+@-webkit-keyframes click {
+		0%   { color:#C30;}
+		40%   { color:#C30;}
+		50%  { color:#0082c6;
+						-webkit-box-shadow:0px 0px 10px #39F;}
+		100% {color:#0082c6;}
+}
+/**********************************************************************/
+
+

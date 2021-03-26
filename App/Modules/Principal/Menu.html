@@ -1,0 +1,539 @@
+<?php 
+    $roles = explode("-",$rol);
+    $rolArray = explode("-",$rol);
+
+    if($_GET['R']!= md5($_SESSION['IDENTIFICADOR'])) {
+            echo "<script languaje='javascript'> location='http://localhost/sistemCont'; </script>";
+    }
+
+?>
+    <!---hoja de estilo en la cabecera para que afecte a todas la paginas-->
+  <style type="text/css">
+     body {
+      overflow: hidden;
+     }
+     /* preloader */
+     #preloader {
+       position: fixed;
+       top:0; left:0;
+       right:0; bottom:0;
+       background:url() no-repeat center;
+       z-index: 100;
+     }
+     #loader {
+       width: 200px;
+       height: 200px;
+       position: absolute;
+       left:45%; top:50%;
+       background: url(../../Images/cargador/loading1.gif) no-repeat center;
+       margin:-50px 0 0 -50px;
+      
+    }
+  </style>
+  <!---fin de la hoja de estilo-->
+  <!---el div para que se inici el precargador-->
+  <div id="preloader">
+     <div id="loader">&nbsp;  
+       <div id="mensaje"  align="center" style="color:#05197f">Espere por favor</div>
+     </div>
+  </div>
+  <!--fin del precargador-->
+
+   <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="container-fluid" style="background-color:#333b57">
+           <!-- <div class="container-fluid" style="background-image: url(../../images/delete.png)"> -->
+                <div class="row" style="color:white">
+                
+                        <div class="col-lg-2">
+
+                               <img src="../../Images/sistemCont.jpg"  width="60%" class="img-thumbnail">
+                        </div>
+                
+                        <div class="col-lg-10">
+
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="navbar-brand" style="color:white" >
+                                            SISTEMA WEB CONTABLE
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="font-size: 10px" >
+                                    <div class="col-lg-3">
+                                         Bienvenido: <STRONG><?php echo strtoupper($_SESSION['NOMBRECOMPLETO']) ?></STRONG>
+                                    </div>
+                                    <div class="col-lg-2">
+                                         Usuario: <STRONG>  <?php echo $_SESSION['USUARIO'] ?></STRONG>
+                                    </div>
+                                    <div class="col-lg-3">
+                                         Rol: <STRONG><?php echo $rol;?></STRONG>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        Departamento: 
+                                        <STRONG> <?php echo $_SESSION["DEPARTAMENTO"].'.  '.$_SESSION["NOMBREDEPENDENCIA"].' - '.$_SESSION["DEPENDENCIA"]; ?>
+                                            
+                                        </STRONG>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            
+            </div>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                
+            </div>
+      
+            <!-- /.navbar-header -->
+            <ul class="nav navbar-top-links navbar-right">
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong></strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Ayer</em>
+                                    </span>
+                                </div>
+                                <div>-</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                     
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong> Leer todos los mensajes</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-messages -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <!--
+                    <ul class="dropdown-menu dropdown-tasks">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 1</strong>
+                                        <span class="pull-right text-muted">40% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                            <span class="sr-only">40% Complete (success)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 2</strong>
+                                        <span class="pull-right text-muted">20% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                            <span class="sr-only">20% Complete</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 3</strong>
+                                        <span class="pull-right text-muted">60% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="sr-only">60% Complete (warning)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 4</strong>
+                                        <span class="pull-right text-muted">80% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">80% Complete (danger)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Tasks</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    -->
+                    <!-- /.dropdown-tasks -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <!--
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i> Nuevo Comentario
+                                    <span class="pull-right text-muted small"></span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                    <span class="pull-right text-muted small">12 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-tasks fa-fw"></i> New Task
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>Leer todas las Alertas</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>-->
+                    <!-- /.dropdown-alerts -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Cuenta</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Mensajes</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="../Principal/fin.php"><i class="fa fa-sign-out fa-fw"></i> Cerrar sesión</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href="../Central/index.php<?php echo $Vars?>"><i class="fa fa-dashboard fa-fw"></i>MENU PRINCIPAL</a>
+                        </li>
+
+                        <?php
+                        if($_SESSION['NIVEL']=='1'){
+                        ?>
+                        <li class="sub-menu">
+                            <a id="sucursal" href="javascript:;" >
+                                <i class="fa fa-home"></i>
+                                Oficinas
+                                <span class="fa arrow">    
+                                </span>
+                            </a>
+                            <ul class="sub">
+                                <li id="listSucursal"><a  href="../Lugar/index.php<?php echo $Vars;?>">Lista Oficinas</a></li>
+                            </ul>
+                        </li>
+
+
+                        <li class="sub-menu">
+                            <a id="cargo" href="javascript:;" >
+                                <i class="fa fa-male"></i>
+                                Roles
+                                <span class="fa arrow">    
+                                </span>
+                            </a>
+                            <ul class="sub">
+                                <li id="listCargo"><a  href="../Cargo/index.php<?php echo $Vars;?>">Lista Roles</a></li>
+                            </ul>
+                        </li>
+                     
+                         <li class="sub-menu">
+                            <a id="usuario" href="javascript:;" >
+                                <i class="fa fa-users"></i>
+                                Usuarios
+                                <span class="fa arrow">    
+                                </span>
+                            </a>
+                            <ul class="sub">
+                                <li id="listUsuarios"><a  href="../Usuario/index.php<?php echo $Vars;?>">Lista Usuarios</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="sub-menu">
+                            <a id="categoria" href="javascript:;" >
+                                <i class="fa fa-th-list"></i>
+                                Conceptos
+                                <span class="fa arrow">    
+                                </span>
+                            </a>
+                            <ul class="sub">
+                                <li id="listCat"><a  href="../Categoria/index.php<?php echo $Vars;?>">Lista Conceptos</a></li>
+                            </ul>
+                        </li>
+                        
+                        <?php
+                        }
+                        if($_SESSION['NIVEL']=='2'){
+                            $ind="index";
+                        }
+                        else{
+                            $ind="index_";
+                        }
+
+                        if($_SESSION['SECCION']=='A@B@E@' || $_SESSION['SECCION']=='A@B@'|| $_SESSION['SECCION']=='B@E@' || $_SESSION['SECCION']=='B@'){
+                        ?>
+                        
+                        <li class="sub-menu">
+                            <a id="liquidacion" href="javascript:;" >
+                                <i class="fa fa-th-list"></i>
+                                Liquidación
+                                <span class="fa arrow">    
+                                </span>
+                            </a>
+                            <ul class="sub">
+                                <li id="listCat"><a  href="../Liquidacion/index.php<?php echo $Vars;?>">Registro Liquidación</a></li>
+                            </ul>
+                            <ul class="sub">
+                                <li id="listCat"><a  href="../Liquidacion/listaLiquidacion.php<?php echo $Vars;?>">Lista Liquidación</a></li>
+                            </ul>
+                            <ul class="sub">
+                                <li id="listCat"><a  href="../Liquidacion/reportes.php<?php echo $Vars;?>">Reportes Liquidación</a></li>
+                            </ul>
+                        </li>
+                        <?php
+                        }
+                        if($_SESSION['SECCION']=='A@B@E@' || $_SESSION['SECCION']=='A@E@'|| $_SESSION['SECCION']=='B@E@' || $_SESSION['SECCION']=='E@'){
+                        ?>
+
+                         <li class="sub-menu">
+                            <a id="Encomiendas" href="javascript:;" >
+                                <i class="fa fa-th-list"></i>
+                                Encomiendas
+                                <span class="fa arrow">    
+                                </span>
+                            </a>
+                            
+                             <ul class="sub">
+                                <li id="listCat"><a  href="../Encomienda/newEncomienda.php<?php echo $Vars;?>">Registro Encomienda</a></li>
+                            </ul>
+                            <ul class="sub">
+                                <li id="listCat"><a  href="../Encomienda/listaEncomienda.php<?php echo $Vars;?>">Lista Encomiendas</a></li>
+                            </ul>
+                            <ul class="sub">
+                                <li id="listCat"><a  href="../Encomienda/listaLiquidacionCarga.php<?php echo $Vars;?>">Liquidacion De Carga</a></li>
+                            </ul>
+                            <ul class="sub">
+                                <li id="listCat"><a  href="../Encomienda/reportes.php<?php echo $Vars;?>">Reportes Encomiendas</a></li>
+                            </ul>
+
+                        </li>
+
+                        <?php
+                        }
+                        if($_SESSION['SECCION']=='A@B@E@' || $_SESSION['SECCION']=='A@E@'|| $_SESSION['SECCION']=='A@B@' || $_SESSION['SECCION']=='A@'){
+                        ?>
+                        <li class="sub-menu">
+                             <a id="ingresos" href="javascript:;" >
+                                <i class="fa fa-th-list"></i>
+                                Ingresos
+                                <span class="fa arrow">    
+                                </span>
+                            </a>
+                            <ul class="sub">
+                                <li id=""><a  href="../Ingreso/<?=$ind?>.php<?php echo $Vars;?>&TP=IMPOSITIVO">IMPOSITIVO</a></li>
+                            </ul>
+                             <ul class="sub">
+                                <li id=""><a  href="../Ingreso/<?=$ind?>.php<?php echo $Vars;?>&TP=OFICINA">OFICINA</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="sub-menu">
+                            <a id="egresos" href="javascript:;" >
+                                <i class="fa fa-th-list"></i>
+                                Egresos
+                                <span class="fa arrow">    
+                                </span>
+                            </a>
+                             <ul class="sub">
+                                <li id=""><a  href="../Egreso/<?=$ind?>.php<?php echo $Vars;?>&TP=IMPOSITIVO">IMPOSITIVO</a></li>
+                            </ul>
+                             <ul class="sub">
+                                <li id=""><a  href="../Egreso/<?=$ind?>.php<?php echo $Vars;?>&TP=OFICINA">OFICINA</a></li>
+                            </ul>
+                           
+                        </li>
+
+                         <li class="sub-menu">
+                            <a id="ingresos" href="../IngresoRecibo/<?=$ind?>.php<?php echo $Vars;?>" >
+                                <i class="fa fa-th-list"></i>
+                               Recibo Ingresos
+                                <span class="fa arrow">    
+                                </span>
+                            </a>
+                        </li>
+
+                        <li class="sub-menu">
+                            <a id="egresos" href="../EgresoRecibo/<?=$ind?>.php<?php echo $Vars;?>" >
+                                <i class="fa fa-th-list"></i>
+                                Recibo Egresos
+                                <span class="fa arrow">    
+                                </span>
+                            </a>
+                            
+                        </li>
+
+                       
+                        <li class="sub-menu">
+                            
+                            <a id="reporte" href="javascript:;" >
+                                <i class="fa fa-file-text"></i>
+                                Reportes
+                                <span class="fa arrow">    
+                                </span>
+                            </a>
+                            
+                            
+                            <ul class="sub">
+                                <li id="listReporte"><a  href="../Reporte/index.php<?php echo $Vars;?>">Generar Reporte</a></li>
+                            </ul>
+                            
+                            <?php
+                               if($_SESSION['NIVEL']=='1'){
+                            ?>
+                            
+                            <ul class="sub">
+                                <li id="listCat"><a  href="javascript:;">Lista Ingresos</a>
+                                <ul class="sub">
+                                     <li id=""> <a  href="../Ingreso/index.php<?php echo $Vars;?>&TP=IMPOSITIVO">IMPOSITIVO</a></li>
+                                </ul>
+                                <ul class="sub">
+                                    <li id=""><a  href="../Ingreso/index.php<?php echo $Vars;?>&TP=OFICINA">OFICINA</a></li>
+                                </ul>
+                                </li>
+                            </ul>
+                             <ul class="sub">
+                                <li id="listCat"><a  href="javascript:;">Lista Egresos</a>
+                                <ul class="sub">
+                                     <li id=""> <a  href="../Egreso/index.php<?php echo $Vars;?>&TP=IMPOSITIVO">IMPOSITIVO</a></li>
+                                </ul>
+                                <ul class="sub">
+                                    <li id=""><a  href="../Egreso/index.php<?php echo $Vars;?>&TP=OFICINA">OFICINA</a></li>
+                                </ul>
+                                </li>
+                            </ul>
+                             <ul class="sub">
+                                <li id="listCat"><a  href="../IngresoRecibo/index.php<?php echo $Vars;?>">Recibo Ingresos</a></li>
+                            </ul>
+
+                            <ul class="sub">
+                                <li id="listCat"><a  href="../EgresoRecibo/index.php<?php echo $Vars;?>">Recibo Egresos</a></li>
+                            </ul>
+
+                            <?php
+                            }
+                           ?>
+                        <?php
+                        }
+                        ?>
+                        </li>
+                       
+                       
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <?php
+            function getDepartamento($dp){
+                switch($dp)
+                {
+                    case 'BN': return "BENI"; break;
+                    case 'CB': return "COCHABAMBA"; break;
+                    case 'CH': return "CHUQUISACA"; break;
+                    case 'LP': return "LA PAZ"; break;
+                    case 'OR': return "ORURO"; break;
+                    case 'PD': return "PANDO"; break;
+                    case 'PT': return "POTOSI"; break;
+                    case 'SC': return "SANTA CRUZ"; break;
+                    case 'TJ': return "TARIJA"; break;
+                }
+            
+            }
+        ?>
